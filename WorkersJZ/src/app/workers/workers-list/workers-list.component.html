@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="worker-info mt-20-40 mb-10">
+    Szukaj pracownika
+  </div>
+  <div class="row">
+    <div class="col-sm-3 mb-10">
+      <input type="text" class="form-control" name="model" [(ngModel)]="person" (ngModelChange)="filterWorker()" placeholder="Znajdź pracownika">
+    </div>
+    <div class="col-sm-3 mb-10">
+      <input type="text" class="form-control" name="model" [(ngModel)]="salaryFrom" (ngModelChange)="filterWorker()" placeholder="Wynagrodzenie od">
+    </div>
+    <div class="col-sm-3 mb-10">
+      <input type="text" class="form-control" name="model" [(ngModel)]="salaryTo" (ngModelChange)="filterWorker()" placeholder="Wynagrodzenie do">
+    </div>
+    <div class="col-sm-3">
+      <select class="w-100" style="height: 39px" [(ngModel)]="department" (change)="filterWorker()">
+        <option value="">All</option>
+        <option *ngFor="let worker of workers | filterUnique">{{worker?.dzial}}</option>
+      </select>
+    </div>
+ </div>
+  <div class="overflow-auto">
+    <table *ngIf="workers" class="table table-dark table-hover mt-20-40">
+      <thead>
+      <tr>
+        <th class="col" scope="col">Imię</th>
+        <th class="col" scope="col">Nazwisko</th>
+        <th class="col" scope="col">Dział</th>
+        <th class="col" scope="col">Wynagrodzenie</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let worker of filteredWorkers | paginate: {itemsPerPage: 5, currentPage: page}">
+        <td>{{worker?.imie}}</td>
+        <td>{{worker?.nazwisko}}</td>
+        <td>{{worker?.dzial}}</td>
+        <td>{{worker?.wynagrodzenieKwota}} {{worker?.wynagrodzenieWaluta}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="filteredWorkers.length > 0" class="d-flex justify-content-center">
+    <pagination-controls previousLabel="" nextLabel="" max-size="5" (pageChange)="page = $event"></pagination-controls>
+  </div>
+  <div *ngIf="filteredWorkers.length > 0" class="worker-info mt-20-40 mb-10">
+    Suma wynagrodzenia: {{sumSalary()}}
+  </div>
+  <div class="form-container">
+    <form [formGroup]="workerForm" (ngSubmit)="workerForm.valid && addWorker()">
+      <fieldset>
+        <legend>Dodaj pracownika</legend>
+        <div class="row mb-4">
+          <div class="col-sm-4 mb-10">
+            <label for="imie">Imię:</label>
+            <input formControlName="imie" type="text" name="imie" id="imie" class="form-control" placeholder="Wprowadź imię" autocomplete="off">
+          </div>
+          <div class="col-sm-4 mb-10">
+            <label for="nazwisko">Nazwisko:</label>
+            <input formControlName="nazwisko" type="text" name="nazwisko" id="nazwisko" class="form-control" placeholder="Wprowadź nazwisko" autocomplete="off">
+          </div>
+          <div class="col-sm-4 mb-10">
+            <label for="dzial">Dział:</label>
+            <input formControlName="dzial" type="text" name="dzial" id="dzial" class="form-control" placeholder="Wprowadź dział" autocomplete="off">
+          </div>
+          <div class="col-sm-4 mb-10">
+            <label for="wynagrodzenieKwota">Wynagrodzenie:</label>
+            <input formControlName="wynagrodzenieKwota" type="number" name="wynagrodzenieKwota" id="wynagrodzenieKwota" class="form-control" placeholder="Wprowadź wynagrodzenie" autocomplete="off">
+          </div>
+          <div class="col-sm-4 mb-10">
+            <label for="wynagrodzenieWaluta">Waluta:</label>
+            <input formControlName="wynagrodzenieWaluta" type="text" name="wynagrodzenieWaluta" id="wynagrodzenieWaluta" class="form-control" placeholder="Wprowadź walutę" autocomplete="off">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-center">
+            <a class="btn me-4" (click)="clearForm()">Wyczyść</a>
+            <button type="submit" class="btn" [disabled]="!workerForm.valid">Dodaj</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

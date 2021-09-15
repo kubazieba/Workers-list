@@ -1,0 +1,43 @@
+.mt-20-40 {
+  margin-top: 20px;
+
+  @media (min-width: 1000px) {
+    margin-top: 40px;
+  }
+}
+
+.worker-info {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+
+table td {
+  cursor: pointer;
+}
+
+.form-container {
+  margin: 50px 0 90px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.ngx-pagination {
+  padding-left: 0;
+}
+
+.ngx-pagination .current,
+.btn-info {
+  background: #11DF82 !important;
+  border-radius: 4px !important;
+}
+
+.ngx-pagination a:hover, .ngx-pagination button:hover {
+  background: none !important;
+}
+
+.ngx-pagination a, .ngx-pagination button {
+  color: #FFF !important;
+}

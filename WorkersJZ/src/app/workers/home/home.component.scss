@@ -1,0 +1,59 @@
+.intro {
+  display: flex;
+  padding: 80px 0;
+
+  @media (max-width: 799px) {
+    text-align: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 1000px) {
+    padding: 100px 0;
+  }
+}
+
+.intro .intro-content .welcome {
+  font-size: 24px;
+  font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 28px;
+  }
+}
+
+.intro .intro-content .name {
+  font-size: 45px;
+  font-weight: 600;
+  margin-left: -5px;
+
+  @media (min-width: 768px) {
+    font-size: 62px;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 76px;
+  }
+}
+
+.intro .intro-content .profession {
+  font-size: 28px;
+  margin: 5px 0;
+
+  @media (min-width: 768px) {
+    font-size: 34px;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 40px;
+  }
+}
+
+.intro .intro-content .profession span {
+  color: #11DF82;
+  font-weight: 500;
+}
+
+.intro .intro-content .looking {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
